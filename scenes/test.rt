@@ -1,0 +1,16 @@
+name      pos       rot
+cam:      30,0,80   10,18,0
+
+name      pos      rot        color   r/angle
+sphere:   10,0,10  0,0,0      FF0000  13
+cylinder: 0,0,20   -60,-20,0  ffff00  7
+plane:    0,-10,0  0,0,0     FAbCdE
+cone:     20,15,0  0,-10,0    00ffff  30
+
+name      pos        intensity
+light:    50,50,30   50
+light:    80,1,50    100
+light:    -30,20,10  100
+
+name	  intensity
+ambient:  20
