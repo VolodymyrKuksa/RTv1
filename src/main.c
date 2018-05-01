@@ -6,7 +6,7 @@
 /*   By: vkuksa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 10:37:10 by vkuksa            #+#    #+#             */
-/*   Updated: 2018/05/01 19:02:34 by vkuksa           ###   ########.fr       */
+/*   Updated: 2018/05/01 19:33:56 by vkuksa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void		init_sdl(t_env *env)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) >= 0)
-		if ((env->wnd = SDL_CreateWindow("TRv1", SDL_WINDOWPOS_CENTERED,
+		if ((env->wnd = SDL_CreateWindow("RTv1", SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED, WNDW, WNDH, SDL_WINDOW_SHOWN)))
 			if ((env->rend = SDL_CreateRenderer(env->wnd, -1,
 			SDL_RENDERER_ACCELERATED)))
