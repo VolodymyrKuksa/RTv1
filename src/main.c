@@ -6,7 +6,7 @@
 /*   By: vkuksa <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 10:37:10 by vkuksa            #+#    #+#             */
-/*   Updated: 2018/05/01 19:33:56 by vkuksa           ###   ########.fr       */
+/*   Updated: 2018/05/02 20:56:21 by vkuksa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int			main(int ac, char **av)
 	if (ac != 2)
 		parse_error(USAGE);
 	parse_input(&env, av[1]);
+	printf("x: %f, y: %f, z: %f\n", env.cam.pos.x, env.cam.pos.y, env.cam.pos.z);
 	ft_putendl("Loading...");
 	env.pixels = malloc(sizeof(int) * WNDW * WNDH);
 	paralel_render(env, &env.pixels);
