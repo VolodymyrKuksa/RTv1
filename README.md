@@ -14,16 +14,50 @@ Clone or download this repository and run `make` in command line while in the ro
 
 ## Usage
 `./RTv1 [filename]`  
-`filename` must contain path to a valid scene.
+`filename` must contain path to a valid scene.  
+If the scene is not valid, RTv1 will write corresponding error on standard output.
 
 ## Scene syntax
+Scene is a file which describes camera, lights and geometric objects that have to be rendered.
+This project can render such geometric shapes:  
+- Sphere;
+- Infinite Plane;
+- Infinite Cylinder;
+- Infinite Cone.  
+  
+Each of these entities is defined in a single line that consists of corresponding name and space separated parameters
+that describe current entity. Order of the parameters has to match the order in definition examples below.  
+ ### Vector Syntax
+ Some of the parameters have to be vectors.  
+ Vectors have to be written as a sequence of three integer or floating point numbers, delimited with `,`.  
+ For examle, `42,-5,3.14` is a vector with such components: `x == 42.0; y == -5.0; z == 3.14`.
+ ### Rotations
+ Rotations are also written in vector form. In rotation vectors each component defines the angle of rotation in degrees around corresponding axis. Rotations are applied by the rule of right hand in the next sequeence:
+ 1. Rotate around x;
+ 2. Rotate around y;
+ 3. Rotate around z.  
+   
+ For example, vector `10,18,-4.5` means: `Rotate around x axis by 10˚(counterclockwise), then rotate around y axis by 18˚(counterclockwise), then rotate around z axis by 4.5˚(clockwise).`
+ ### Camera Definition
+ 
+ ### Light Definition
+ 
+ ### Object Definition
 
 ## More Screenshots
+Demo1:  
 ![screeenshot1](images/demo.1.screenshot.png)
+Demo2:  
 ![screeenshot2](images/demo.2.screenshot.png)
+Demo3:  
 ![screeenshot3](images/demo.3.screenshot.png)
+Demo4:  
 ![screeenshot4](images/demo.4.screenshot.png)
+Demo5:  
 ![screeenshot5](images/demo.5.screenshot.png)
+Demo6:  
 ![screeenshot6](images/demo.6.screenshot.png)
+Demo7:  
 ![screeenshot7](images/demo.7.screenshot.png)
+Inside sphere:  
 ![screeenshot_inside](images/inside_sphere.rt.screenshot.png)
