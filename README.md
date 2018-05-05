@@ -50,16 +50,22 @@ that describe current entity. Order of the parameters has to match the order in 
  ### Light Definition
  Light is defined via such sequence of space separated parameters:  
  `light: [position_vector] [intensity]`  
- `light` is the name of light entity. It must be rewritter to letter and preside the light definition.  
+ `light:` is the name of light entity. It must be rewritter to letter and preside the light definition.  
  `[position_vector]` defines light origin in world coordinates.  
  `[intensity]` is an int or floating point value that represent the intensity of the light (it's brightness), has range of `0 - 100`.  
    
    Ambient light is defined via such sequence of space separated parameters:  
    `ambient: [intensity]`  
-   `ambient` is the name of ambient light entity. It must be rewritter to letter and preside the ambient light definition.  
+   `ambient:` is the name of ambient light entity. It must be rewritter to letter and preside the ambient light definition.  
    `[intensity]` same as for regular light entity.
  
  ### Object Definition
+ Object entities have a similar definition with other entites.  
+ RTv1 can parse and render such objects:  
+ `plane: [position_vector] [rotation_vector]`  
+ `sphere: [position_vector] [rotation_vector] [radius]`  
+ `cylinder: [position_vector] [rotation_vector] [radius]`  
+ `cone: [position_vector] [rotation_vector] [angle]`  
 
 ## More Screenshots
 Demo1:  
