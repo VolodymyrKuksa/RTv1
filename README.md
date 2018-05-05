@@ -44,10 +44,20 @@ that describe current entity. Order of the parameters has to match the order in 
  Camera is defined via such sequence of space separated parameters:  
  `cam: [position_vector] [rotation_vector]`  
  `cam:` is the name of camera entity. It must be rewritter to letter and preside the camera definition.  
- `[position_vector]` defines camera origin in world coordinates.
- `[rotation_vector]` defines rotation of ca...
+ `[position_vector]` defines camera origin in world coordinates.  
+ `[rotation_vector]` defines rotation of camera direction vector, which is set to `0,0,-1` by default.
  
  ### Light Definition
+ Light is defined via such sequence of space separated parameters:  
+ `light: [position_vector] [intensity]`  
+ `light` is the name of light entity. It must be rewritter to letter and preside the light definition.  
+ `[position_vector]` defines light origin in world coordinates.  
+ `[intensity]` is an int or floating point value that represent the intensity of the light (it's brightness), has range of `0 - 100`.  
+   
+   Ambient light is defined via such sequence of space separated parameters:  
+   `ambient: [intensity]`  
+   `ambient` is the name of ambient light entity. It must be rewritter to letter and preside the ambient light definition.  
+   `[intensity]` same as for regular light entity.
  
  ### Object Definition
 
