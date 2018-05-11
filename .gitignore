@@ -1,4 +1,8 @@
 .DS_Store
+.idea/
+CMakeLists.txt
+cmake-build-debug/
+cmake-modules/
 SDL2-2.0.8/.DS_Store
 libft/.DS_Store
 libvec/.DS_Store
