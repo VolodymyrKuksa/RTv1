@@ -33,6 +33,13 @@ void	parse_cam(t_cam *cam, char **sl)
 	cam->ldir = vec_norm(vec_cross(cam->dir, cam->updir));
 }
 
+void	parse_rf_depth(t_env *env, char **sl)
+{
+	if (!sl[1])
+		parse_error(NOT_ENOUGH_DATA);
+	env->refl_depth = (unsigned)(ABS(ft_atoi(sl[1])));
+}
+
 int		get_vec_data(t_vec *res, char *str)
 {
 	size_t	len;

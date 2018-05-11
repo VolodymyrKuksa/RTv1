@@ -53,7 +53,6 @@ unsigned int	refl_col(t_ray r, t_env env, int depth)
 	int		i;
 	t_rgb	col;
 
-	r.col.c = 0;
 	i = -1;
 	while (++i < env.objcount)
 		r.t[i] = env.obj[i].get_t(&r, env.obj[i]);
@@ -66,7 +65,8 @@ unsigned int	refl_col(t_ray r, t_env env, int depth)
 		r.start = r.end;
 		r.dir = r.rv;
 		col.c = refl_col(r, env, --depth);
-		r.col.c = col_add(r.col, 0.5, col, 0.5);
+		r.col.c = col_add(r.col, 1.0 - env.obj[r.id].rf_rate, col,
+			env.obj[r.id].rf_rate);
 	}
 	return (r.col.c);
 }

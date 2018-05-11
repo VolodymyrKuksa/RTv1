@@ -51,6 +51,7 @@ typedef struct		s_obj
 	double			r;
 	double			(*get_col)(t_ray*, t_rgb*, int, void *);
 	double			(*get_t)(t_ray*, struct s_obj);
+	double			rf_rate;
 }					t_obj;
 
 typedef struct		s_light
@@ -72,6 +73,7 @@ typedef struct		s_env
 	t_light			*light;
 	t_light			ambient;
 	double			total_light;
+	unsigned int	refl_depth;
 }					t_env;
 
 typedef struct		s_thread_data

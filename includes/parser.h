@@ -37,6 +37,7 @@ void	parse_input(t_env *env, char *filename);
 
 void	default_env(t_env *env);
 
+void	parse_rf_depth(t_env *env, char **sl);
 void	parse_cam(t_cam *cam, char **sl);
 void	parse_ambient(t_env *env, char **sl);
 void	parse_light(t_light *light, char **sl);

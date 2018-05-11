@@ -38,31 +38,35 @@ void	parse_func(t_obj *obj, char *name)
 	}
 }
 
+void	parse_r(t_obj *obj, char **sl)
+{
+	if (!sl[5] && !ft_strequ(sl[0], "plane:"))
+		parse_error(NOT_ENOUGH_DATA);
+	if (ft_strequ(sl[0], "sphere:") || ft_strequ(sl[0], "cylinder:") ||
+		ft_strequ(sl[0], "cone:"))
+	{
+		parse_error(get_double(&obj->r, sl[5]));
+		obj->r = obj->r > 999999 ? 999999 : obj->r;
+	}
+	if (ft_strequ(sl[0], "cone:"))
+		obj->r = tan(DTR(obj->r));
+}
+
 void	parse_obj(t_obj *obj, char **sl)
 {
 	t_vec	rot;
 
 	parse_func(obj, sl[0]);
-	if (!sl[1])
+	if (!sl[1] || !sl[2] || !sl[3] || !sl[4])
 		parse_error(NOT_ENOUGH_DATA);
 	parse_error(get_vec_data(&obj->pos, sl[1]));
-	if (!sl[2])
-		parse_error(NOT_ENOUGH_DATA);
 	parse_error(get_vec_data(&rot, sl[2]));
 	obj->v = vec_rot_xyz(vec_new(0, 1, 0), rot);
-	if (!sl[3])
-		parse_error(NOT_ENOUGH_DATA);
 	parse_error(get_col_data(&obj->col, sl[3]));
-	if (!sl[4] && !ft_strequ(sl[0], "plane:"))
-		parse_error(NOT_ENOUGH_DATA);
-	if (ft_strequ(sl[0], "sphere:") || ft_strequ(sl[0], "cylinder:") ||
-	ft_strequ(sl[0], "cone:"))
-	{
-		parse_error(get_double(&obj->r, sl[4]));
-		obj->r = obj->r > 999999 ? 999999 : obj->r;
-	}
-	if (ft_strequ(sl[0], "cone:"))
-		obj->r = tan(DTR(obj->r));
+	parse_error(get_double(&obj->rf_rate, sl[4]));
+	obj->rf_rate = obj->rf_rate < 0 ? 0 : obj->rf_rate;
+	obj->rf_rate = obj->rf_rate > 1 ? 1 : obj->rf_rate;
+	parse_r(obj, sl);
 }
 
 void	obj_push_back(t_env *env, char **sl)

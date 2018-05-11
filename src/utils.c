@@ -39,6 +39,7 @@ void	default_env(t_env *env)
 	env->cam.updir = vec_new(0, -1, 0);
 	env->cam.ldir = vec_norm(vec_cross(env->cam.dir, env->cam.updir));
 	env->total_light = 0.2;
+	env->refl_depth = 5;
 }
 
 void	put_error(char *str)
@@ -55,6 +56,7 @@ void	obj_cpy(t_obj src, t_obj *dst)
 	dst->get_col = src.get_col;
 	dst->pos = vec_cpy(src.pos);
 	dst->v = vec_cpy(src.v);
+	dst->rf_rate = src.rf_rate;
 }
 
 void	light_cpy(t_light src, t_light *dst)

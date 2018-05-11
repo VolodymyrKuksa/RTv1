@@ -42,7 +42,6 @@ double			get_t(double a, double b, double d);
 unsigned int	get_color(t_ray r, int id, t_env *env);
 unsigned int	col_add(t_rgb c1, double i1, t_rgb c2, double i2);
 
-unsigned int	trace_ray(t_ray *r, t_env env);
 unsigned int	refl_col(t_ray r, t_env env, int depth);
 void			init_ray(t_ray *r, t_env env);
 int				find_closest(t_ray r, t_env env);

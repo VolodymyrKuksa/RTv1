@@ -47,7 +47,8 @@ void		*render_quater(void *data)
 			r.dir = vec_sub(ppc, vec_scale(td->env.cam.ldir, (j - WNDW_H)));
 			r.dir = vec_add(r.dir, vec_scale(td->env.cam.updir, (i - WNDH_H)));
 			r.dir = vec_norm(vec_sub(r.dir, r.start));
-			(td->pixels)[i * WNDW + j] = refl_col(r, td->env, 15);
+			(td->pixels)[i * WNDW + j] =
+				refl_col(r, td->env, td->env.refl_depth);
 		}
 	}
 	free(r.t);

@@ -49,6 +49,8 @@ void	parse_line(t_env *env, char **sl)
 		parse_cam(&env->cam, sl);
 	if (ft_strequ(sl[0], "ambient:"))
 		parse_ambient(env, sl);
+	if (ft_strequ(sl[0], "rf_depth:"))
+		parse_rf_depth(env, sl);
 	if (ft_strequ(sl[0], "light:"))
 		light_push_back(env, sl);
 	if (ft_strequ(sl[0], "sphere:") || ft_strequ(sl[0], "cylinder:") ||
