@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libvec.h"
 
 t_vec		vec_sphere_n(t_ray r, double d, t_vec cent)
 {
@@ -40,17 +39,17 @@ double		t_sphere(t_ray *r, t_obj sphere)
 	return (d < 0 ? -1 : get_t(a, b, d));
 }
 
-double		col_sphere(t_ray r, t_rgb *col, int id, void *env)
+double		col_sphere(t_ray *r, t_rgb *col, int id, void *env)
 {
 	double	t;
 	t_obj	sphere;
 
 	sphere = ((t_env*)env)->obj[id];
-	t = t_sphere(&r, sphere);
+	t = t_sphere(r, sphere);
 	if (t > 0)
 	{
-		comp_ray(&r, vec_sphere_n(r, t, sphere.pos), t);
-		col->c = get_color(r, id, (t_env*)env);
+		comp_ray(r, vec_sphere_n(*r, t, sphere.pos), t);
+		col->c = get_color(*r, id, (t_env*)env);
 	}
 	return (t);
 }

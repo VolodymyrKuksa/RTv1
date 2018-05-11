@@ -36,7 +36,7 @@ typedef struct		s_ray
 	t_vec			start;
 	t_vec			dir;
 	double			*t;
-	t_rgb			*col;
+	t_rgb			col;
 	int				id;
 	t_vec			end;
 	t_vec			n;
@@ -49,7 +49,7 @@ typedef struct		s_obj
 	t_vec			v;
 	t_rgb			col;
 	double			r;
-	double			(*get_col)(t_ray, t_rgb*, int, void *);
+	double			(*get_col)(t_ray*, t_rgb*, int, void *);
 	double			(*get_t)(t_ray*, struct s_obj);
 }					t_obj;
 

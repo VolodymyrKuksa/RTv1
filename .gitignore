@@ -14,3 +14,7 @@ libft/*.o
 libft/libft.a
 RTv1
 SDL2-2.0.8/
+.idea/
+CMakeLists.txt
+cmake-build-debug/
+cmake-modules/

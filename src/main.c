@@ -47,12 +47,10 @@ void		*render_quater(void *data)
 			r.dir = vec_sub(ppc, vec_scale(td->env.cam.ldir, (j - WNDW_H)));
 			r.dir = vec_add(r.dir, vec_scale(td->env.cam.updir, (i - WNDH_H)));
 			r.dir = vec_norm(vec_sub(r.dir, r.start));
-			trace_ray(&r, td->env);
-			(td->pixels)[i * WNDW + j] = (r.id != -1 ? r.col[r.id].c : 0);
+			(td->pixels)[i * WNDW + j] = refl_col(r, td->env, 15);
 		}
 	}
 	free(r.t);
-	free(r.col);
 	pthread_exit(0);
 }
 
@@ -86,7 +84,7 @@ void		update_wnd(t_env env)
 		j = -1;
 		while (++j < WNDW)
 		{
-			col.c = env.pixels[i * WNDW + j];
+			col.c = (unsigned)env.pixels[i * WNDW + j];
 			SDL_SetRenderDrawColor(env.rend, col.bgra[2], col.bgra[1],
 				col.bgra[0], col.bgra[3]);
 			SDL_RenderDrawPoint(env.rend, j, i);
@@ -103,7 +101,6 @@ int			main(int ac, char **av)
 	if (ac != 2)
 		parse_error(USAGE);
 	parse_input(&env, av[1]);
-	printf("x: %f, y: %f, z: %f\n", env.cam.pos.x, env.cam.pos.y, env.cam.pos.z);
 	ft_putendl("Loading...");
 	env.pixels = malloc(sizeof(int) * WNDW * WNDH);
 	paralel_render(env, &env.pixels);
@@ -111,9 +108,10 @@ int			main(int ac, char **av)
 	init_sdl(&env);
 	update_wnd(env);
 	while (1)
+	{
 		while (SDL_PollEvent(&e))
 			if (e.type == SDL_QUIT || (e.type == SDL_KEYDOWN && e.key.keysym.sym
-				== SDLK_ESCAPE))
-				exit(0);
-	return (0);
+																== SDLK_ESCAPE))
+				return (0);
+	}
 }

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libvec.h"
 
 t_vec		vec_cone_n(t_ray r, t_vec pt, double t, t_obj cone)
 {
@@ -43,23 +42,22 @@ double		t_cone(t_ray *r, t_obj cone)
 	c = vec_dot(x, cone.v);
 	c = vec_dot(x, x) - (1 + cone.r * cone.r) * c * c;
 	d = b * b - 4 * a * c;
-	d = DROUND(d);
-	return (d = d < 0 ? -1 : get_t(a, b, d));
+	return (d < 0 ? -1 : get_t(a, b, d));
 }
 
-double		col_cone(t_ray r, t_rgb *col, int id, void *env)
+double		col_cone(t_ray *r, t_rgb *col, int id, void *env)
 {
 	double	t;
 	t_obj	cone;
 	t_vec	pt;
 
 	cone = ((t_env*)env)->obj[id];
-	t = t_cone(&r, cone);
+	t = t_cone(r, cone);
 	if (t > 0)
 	{
-		pt = vec_add(r.start, vec_scale(r.dir, t));
-		comp_ray(&r, vec_cone_n(r, pt, t, cone), t);
-		col->c = get_color(r, id, (t_env*)env);
+		pt = vec_add(r->start, vec_scale(r->dir, t));
+		comp_ray(r, vec_cone_n(*r, pt, t, cone), t);
+		col->c = get_color(*r, id, (t_env*)env);
 	}
 	return (t);
 }

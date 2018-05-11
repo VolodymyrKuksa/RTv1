@@ -48,17 +48,17 @@ double		t_cylinder(t_ray *r, t_obj cylinder)
 	return (d = d < 0 ? -1 : get_t(a, b, d));
 }
 
-double		col_cylinder(t_ray r, t_rgb *col, int id, void *env)
+double		col_cylinder(t_ray *r, t_rgb *col, int id, void *env)
 {
 	double	d;
 	t_obj	cylinder;
 
 	cylinder = ((t_env*)env)->obj[id];
-	d = t_cylinder(&r, cylinder);
+	d = t_cylinder(r, cylinder);
 	if (d > 0)
 	{
-		comp_ray(&r, vec_cylinder_n(r, d, cylinder), d);
-		col->c = get_color(r, id, (t_env*)env);
+		comp_ray(r, vec_cylinder_n(*r, d, cylinder), d);
+		col->c = get_color(*r, id, (t_env*)env);
 	}
 	return (d);
 }

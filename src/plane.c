@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rtv1.h"
-#include "libvec.h"
 
 t_vec		vec_plane_n(t_ray r, t_obj plane)
 {
@@ -34,17 +33,17 @@ double		t_plane(t_ray *r, t_obj plane)
 	return (t > 0 ? t : -1);
 }
 
-double		col_plane(t_ray r, t_rgb *col, int id, void *env)
+double		col_plane(t_ray *r, t_rgb *col, int id, void *env)
 {
 	double	t;
 	t_obj	plane;
 
 	plane = ((t_env*)env)->obj[id];
-	t = t_plane(&r, plane);
+	t = t_plane(r, plane);
 	if (t > 0)
 	{
-		comp_ray(&r, vec_plane_n(r, plane), t);
-		col->c = get_color(r, id, (t_env*)env);
+		comp_ray(r, vec_plane_n(*r, plane), t);
+		col->c = get_color(*r, id, (t_env*)env);
 	}
 	return (t);
 }

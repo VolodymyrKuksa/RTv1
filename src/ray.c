@@ -12,16 +12,14 @@
 
 #include "rtv1.h"
 
-void		init_ray(t_ray *r, t_env env)
+void			init_ray(t_ray *r, t_env env)
 {
 	if (!(r->t = (double*)malloc(sizeof(double) * env.objcount)))
-		put_error("Ray memory allocation fail");
-	if (!(r->col = (t_rgb*)malloc(sizeof(t_rgb) * env.objcount)))
 		put_error("Ray memory allocation fail");
 	r->start = vec_cpy(env.cam.pos);
 }
 
-double		get_t(double a, double b, double d)
+double			get_t(double a, double b, double d)
 {
 	double	t1;
 	double	t2;
@@ -35,7 +33,7 @@ double		get_t(double a, double b, double d)
 	return (-1);
 }
 
-int			find_closest(t_ray r, t_env env)
+int				find_closest(t_ray r, t_env env)
 {
 	int		id;
 	int		i;
@@ -50,21 +48,40 @@ int			find_closest(t_ray r, t_env env)
 	return (id);
 }
 
-void		trace_ray(t_ray *r, t_env env)
+unsigned int	refl_col(t_ray r, t_env env, int depth)
 {
 	int		i;
+	t_rgb	col;
 
+	r.col.c = 0;
 	i = -1;
 	while (++i < env.objcount)
-		r->t[i] = env.obj[i].get_col(*r, &r->col[i], i, &env);
-	r->id = find_closest(*r, env);
+		r.t[i] = env.obj[i].get_t(&r, env.obj[i]);
+	r.id = find_closest(r, env);
+	if (r.id < 0)
+		return (0);
+	env.obj[r.id].get_col(&r, &r.col, r.id, &env);
+	if (depth > 0)
+	{
+		r.start = r.end;
+		r.dir = r.rv;
+		col.c = refl_col(r, env, --depth);
+		r.col.c = col_add(r.col, 0.5, col, 0.5);
+	}
+	return (r.col.c);
 }
 
-void		comp_ray(t_ray *r, t_vec n, double t)
+unsigned int	trace_ray(t_ray *r, t_env env)
+{
+	r->col.c = refl_col(*r, env, 15);
+	return (r->col.c);
+}
+
+void			comp_ray(t_ray *r, t_vec n, double t)
 {
 	if (r->id == -1)
 		return ;
 	r->n = vec_cpy(n);
-	r->end = vec_add(r->start, vec_scale(r->dir, t));
+	r->end = vec_add(r->start, vec_scale(r->dir, t * 0.9999));
 	r->rv = vec_sub(r->dir, vec_scale(r->n, 2.0 * vec_dot(r->dir, r->n)));
 }

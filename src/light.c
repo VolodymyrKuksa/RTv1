@@ -17,12 +17,12 @@ unsigned int	col_add(t_rgb c1, double i1, t_rgb c2, double i2)
 	t_rgb			res;
 	unsigned int	tmp;
 
-	tmp = c1.bgra[0] * i1 + c2.bgra[0] * i2;
-	res.bgra[0] = tmp > 0xff ? 0xff : tmp;
-	tmp = c1.bgra[1] * i1 + c2.bgra[1] * i2;
-	res.bgra[1] = tmp > 0xff ? 0xff : tmp;
-	tmp = c1.bgra[2] * i1 + c2.bgra[2] * i2;
-	res.bgra[2] = tmp > 0xff ? 0xff : tmp;
+	tmp = (unsigned)(c1.bgra[0] * i1 + c2.bgra[0] * i2);
+	res.bgra[0] = (unsigned char)(tmp > 0xff ? 0xff : tmp);
+	tmp = (unsigned)(c1.bgra[1] * i1 + c2.bgra[1] * i2);
+	res.bgra[1] = (unsigned char)(tmp > 0xff ? 0xff : tmp);
+	tmp = (unsigned)(c1.bgra[2] * i1 + c2.bgra[2] * i2);
+	res.bgra[2] = (unsigned char)(tmp > 0xff ? 0xff : tmp);
 	return (res.c);
 }
 
@@ -32,7 +32,7 @@ unsigned int	col_add(t_rgb c1, double i1, t_rgb c2, double i2)
 **	else -> return dist
 */
 
-int				in_shadow(t_ray sr, t_vec dest, t_env env)
+double			in_shadow(t_ray sr, t_vec dest, t_env env)
 {
 	int		i;
 	double	dist;
