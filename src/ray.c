@@ -60,10 +60,13 @@ unsigned int	refl_col(t_ray r, t_env env, int depth)
 	if (r.id < 0)
 		return (0);
 	env.obj[r.id].get_col(&r, &r.col, r.id, &env);
-	if (depth > 0)
+	if (depth > 0 && env.obj[r.id].rf_rate)
 	{
 		r.start = r.end;
 		r.dir = r.rv;
+//		r.dir = vec_rot_x(r.dir, (double)(rand() % 1000) / 100000.0);
+//		r.dir = vec_rot_y(r.dir, (double)(rand() % 1000) / 100000.0);
+//		r.dir = vec_rot_z(r.dir, (double)(rand() % 1000) / 100000.0);
 		col.c = refl_col(r, env, --depth);
 		r.col.c = col_add(r.col, 1.0 - env.obj[r.id].rf_rate, col,
 			env.obj[r.id].rf_rate);
