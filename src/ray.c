@@ -71,12 +71,6 @@ unsigned int	refl_col(t_ray r, t_env env, int depth)
 	return (r.col.c);
 }
 
-unsigned int	trace_ray(t_ray *r, t_env env)
-{
-	r->col.c = refl_col(*r, env, 15);
-	return (r->col.c);
-}
-
 void			comp_ray(t_ray *r, t_vec n, double t)
 {
 	if (r->id == -1)
