@@ -3,12 +3,12 @@
 
 # RTv1
 RTv1 is a simple ray tracing program. The project was developed as a part of 42 school program.
-It parses a 3D scene forom a file and applies ray tracing algorithm to render the given scene.  
+It parses a 3D scene from a file and applies ray tracing algorithm to render the given scene.  
 *Note:* this project was made for MacOS.  
 
 ![screeenshot_test](images/test.rt.screenshot.png)
 
-## Instalation
+## Installation
 Clone or download this repository and run `make` in command line while in the root of the repository. This will build executable called RTv1. Makefile compiles SDL2 library from source files (as stated in the subject, see [rtv1.en.pdf](rtv1.en.pdf)) so building process might take some time.
 
 ## Usage
@@ -50,13 +50,13 @@ that describe current entity. Order of the parameters has to match the order in 
  ### Light Definition
  Light is defined via such sequence of space separated parameters:  
  `light: [position_vector] [intensity]`  
- `light:` is the name of light entity. It must be rewritter to letter and preside the light definition.  
+ `light:` is the name of light entity. It must be rewritten to letter and preside the light definition.  
  `[position_vector]` defines light origin in world coordinates.  
  `[intensity]` is an int or floating point value that represent the intensity of the light (it's brightness), has range of `0 - 100`.  
    
    Ambient light is defined via such sequence of space separated parameters:  
-   `ambient: [intensity]`  
-   `ambient:` is the name of ambient light entity. It must be rewritter to letter and preside the ambient light definition.  
+   `ambient: [intensity]`  
+   `ambient:` is the name of ambient light entity. It must be rewritten to letter and preside the ambient light definition.  
    `[intensity]` same as for regular light entity.
  
  ### Object Definition
